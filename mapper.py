@@ -18,12 +18,6 @@ class KmeansWithHadoop:
             print("({0},{1})\t({2},{3})".format(centroid[0], centroid[1], x, y))
 
 
-    # o mapper prepei na ftynei
-    # (10,20)   (1.2381237,42.42482)
-    # (30,30)   (5.133818,1.2434213)
-    # (30,30)  (6.131231234,8.1238123)
-    # ....
-
     def main(self):
         self.mapper()
         sys.stdin = sys.__stdin__
