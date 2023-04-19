@@ -14,7 +14,7 @@ class KmeansWithHadoop:
             distances = [np.linalg.norm(point - c) for c in self.centroids]
             closest_idx = np.argmin(distances)
             centroid = self.centroids[closest_idx]
-            print("({0},{1})\t({2},{3})".format(centroid[0], centroid[1], x, y))
+            print("{0},{1}\t{2},{3}".format(centroid[0], centroid[1], x, y))
 
 
     def main(self):

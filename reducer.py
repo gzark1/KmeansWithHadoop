@@ -1,3 +1,4 @@
+#!/usr/bin/python
 #Reduce function should compute the new center for each constructed
 #list. All distances are Euclidean
 import sys
@@ -7,7 +8,10 @@ def reducer():
     centroids = {}  # dictionary to store centroid coordinates and associated data points
 
     for line in sys.stdin:
-        cx, cy, x, y = line.strip().split(",")
+        centroidxy, pointxy = line.strip().split("\t")
+        cx, cy = centroidxy.split(",")
+        x, y = pointxy.split(",")
+
         centroid = (float(cx), float(cy))
 
         if centroid not in centroids:
@@ -34,3 +38,5 @@ def reducer():
 
         # output the new centroid
         print(f'{new_centroid[0]},{new_centroid[1]}')
+
+reducer()
