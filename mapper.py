@@ -1,14 +1,21 @@
-#!/usr/bin/env python
 import sys
 import numpy as np
 
 class KmeansWithHadoop:
+    #10 20 30 30 25 15 
 
     def __init__(self) -> None:
-        self.centroids = [np.array((10, 20)), np.array((30, 30)), np.array((25, 15))]
-
+        self.centroids = None
+    
     def mapper(self):
+        centroid_lines = None
+        with open('centroids.txt') as f:
+            centroid_lines = f.readlines()
+        
+        self.centroids = [np.array(line.strip().split(","), dtype=float) for line in centroid_lines]
+    
         for line in sys.stdin:
+            
             x, y = line.strip().split(",")
             point = np.array((float(x), float(y)))
             distances = [np.linalg.norm(point - c) for c in self.centroids]
@@ -18,8 +25,9 @@ class KmeansWithHadoop:
 
 
     def main(self):
+
         self.mapper()
         sys.stdin = sys.__stdin__
-
+    
 test = KmeansWithHadoop()
 test.main()
