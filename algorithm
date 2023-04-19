@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Set the input and output paths
+INPUT_PATH=/input
+OUTPUT_PATH=/output
+
+# Set the convergence threshold
+CONVERGENCE_THRESHOLD=0.001
+
+
+# Initialize the centroids
+INITIAL_CENTROIDS=<path-to-initial-centroids_file>
+
+# Loop until centroids converge
+while true; do
+    echo "Running iteration..."
+
+    # Run the MapReduce job
+    hadoop jar <path-to-hadoop-streaming-jar> -input $INPUT_PATH -output $OUTPUT_PATH -mapper kmeans_mapper.py -reducer kmeans_reducer.py -file kmeans_mapper.py -file kmeans_reducer.py -file $INITIAL_CENTROIDS
+
+    # Copy the output to use as input in the next iteration
+    hadoop fs -rm -r $INPUT_PATH
+    hadoop fs -cp $OUTPUT_PATH/* $INPUT_PATH
+
+    # Calculate the new centroids and check for convergence
+    NEW_CENTROIDS=<path-to-output-centroids>
+    CONVERGED=$(python kmeans_convergence.py $INITIAL_CENTROIDS $NEW_CENTROIDS $CONVERGENCE_THRESHOLD)
+
+    # If centroids have converged, exit the loop
+    if [[ $CONVERGED -eq 1 ]]; then
+        echo "Centroids have converged. Exiting..."
+        break
+    fi
+
+    # Update the initial centroids for the next iteration
+    INITIAL_CENTROIDS=$NEW_CENTROIDS
+done
+
