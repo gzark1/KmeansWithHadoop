@@ -44,5 +44,3 @@ def reducer():
             print(f'{new_centroid[0]},{new_centroid[1]}')
 
 reducer()
-
-reducer()
