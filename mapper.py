@@ -23,7 +23,6 @@ class KmeansWithHadoop:
             centroid = self.centroids[closest_idx]
             print("{0},{1}\t{2},{3}".format(centroid[0], centroid[1], x, y))
 
-
     def main(self):
 
         self.mapper()
