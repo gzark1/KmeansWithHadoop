@@ -28,12 +28,14 @@ Before running this project, make sure you have the following software installed
 
 3. Specify the initial centroids in the centroids.txt
 
-4. Upload input data to Hadoop:
+4. Ensure that your Hadoop server is running. To start the server, navigate to the hadoop/sbin directory in your Hadoop installation directory. For Windows, run the `start-all.cmd` script. For Linux, run the `start-all.sh` script.
+
+5. Upload input data to Hadoop:
 
    Upload the input data file to Hadoop HDFS using the following command:
    `hadoop fs -put /path/to/input-data /input`
 
-5. Run the K-means algorithm:
+6. Run the K-means algorithm:
 
     Use the following command to run the K-means algorithm:
 
@@ -45,7 +47,7 @@ Before running this project, make sure you have the following software installed
 
     `python main.py -jar C:\hadoop\share\hadoop\tools\lib\hadoop-st -input /input/input.txt -output /output`
 
-6. Retrieve the results:
+7. Retrieve the results:
 
     After the MapReduce job completes, you can retrieve the output results from Hadoop HDFS using the following command:
     
