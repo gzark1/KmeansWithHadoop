@@ -36,6 +36,7 @@ jar_path = args.jar
 # Initialize centroids
 current_centroids = initial_centroids
 # Loop for running k-means iteratively
+
 for i in range(max_iterations):
     print("Running iteration: ", i + 1, "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
     if i == 0:
@@ -47,32 +48,32 @@ for i in range(max_iterations):
                                                                                                'mapper.py" -reducer ' \
                                                                                                '"python reducer.py"'
     print(hadoop_cmd)
-    # # Run the CMD command and capture the output
-    # output = subprocess.check_output(hadoop_cmd, shell=True)
-    #
-    # # Decode the output from bytes to string
-    # output = output.decode('utf-8')
-    #
-    # # Print the output
-    # print(output)
-    #
-    # # Read the final centroids from the output
-    # # You can implement the logic to parse the centroids from the output here
-    # with open('centroids.txt') as f:
-    #     centroid_lines = f.readlines()
-    #
-    # current_centroids = [np.array(line.strip().split(","), dtype=float) for line in centroid_lines]
-    #
-    # # Compare the final centroids with the current centroids for convergence
-    # converged = True
-    # for j in range(len(current_centroids)):
-    #     print(initial_centroids[j], current_centroids[j])
-    #     if np.linalg.norm(initial_centroids[j] - current_centroids[j]) > convergence_threshold:
-    #         converged = False
-    #         break  # Break out of the loop if any centroid has not converged
-    #
-    # if converged:
-    #     print("Converged! Centroids remain unchanged.")
-    #     break  # Break out of the loop if centroids remain unchanged
-    # else:
-    #     initial_centroids = current_centroids  # Update current centroids for the next iteration
+    # Run the CMD command and capture the output
+    output = subprocess.check_output(hadoop_cmd, shell=True)
+    
+    # Decode the output from bytes to string
+    output = output.decode('utf-8')
+    
+    # Print the output
+    print(output)
+    
+    # Read the final centroids from the output
+    # You can implement the logic to parse the centroids from the output here
+    with open('centroids.txt') as f:
+        centroid_lines = f.readlines()
+    
+    current_centroids = [np.array(line.strip().split(","), dtype=float) for line in centroid_lines]
+    
+    # Compare the final centroids with the current centroids for convergence
+    converged = True
+    for j in range(len(current_centroids)):
+        print(initial_centroids[j], current_centroids[j])
+        if np.linalg.norm(initial_centroids[j] - current_centroids[j]) > convergence_threshold:
+            converged = False
+            break  # Break out of the loop if any centroid has not converged
+    
+    if converged:
+        print("Converged! Centroids remain unchanged.")
+        break  # Break out of the loop if centroids remain unchanged
+    else:
+        initial_centroids = current_centroids  # Update current centroids for the next iteration
