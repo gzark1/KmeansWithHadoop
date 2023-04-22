@@ -13,8 +13,7 @@ Before running this project, make sure you have the following software installed
 
 - Hadoop: This implementation relies on Hadoop for distributed processing. You should have a working Hadoop cluster set
   up and configured.
-- Java: The MapReduce programs in this project are written in Java, so you should have Java Development Kit (JDK)
-  installed.
+- Java:  In order to run Hadoop, regardless of the language used to write the MapReduce programs, you still need to have the Java Development Kit (JDK) installed on your machine. This is because Hadoop itself is written in Java and requires the JDK to run.
 
 ## Usage
 
