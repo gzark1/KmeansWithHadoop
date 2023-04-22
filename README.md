@@ -39,7 +39,7 @@ Before running this project, make sure you have the following software installed
 
     Use the following command to run the K-means algorithm:
 
-    `python main.py -input /input -output /output -jar `
+    `python main.py -input /input -output /output -jar path_to_hadoop_streaming`
 
     Where -input is the path to input file, -output is the path to the output file
     and -jar is the path to the hadoop streaming jar.Note that we are using mapper and reducer in python so we have to use
@@ -52,3 +52,4 @@ Before running this project, make sure you have the following software installed
     After the MapReduce job completes, you can retrieve the output results from Hadoop HDFS using the following command:
     
     `hadoop fs -get <path_to_final_output_of_algorithm_iteration>`
+8. To verify the results, execute the "test_kmeans.py" script and review its output. This script employs scikit-learn to solve the same problem and allows for a comparison of the resulting clusters. 
